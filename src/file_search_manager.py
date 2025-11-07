@@ -188,7 +188,8 @@ class FileSearchManager:
             store = self.get_store(store_name)
             if store:
                 print(f"\nFile Search Store: {store.name}")
-                print(f"Display Name: {store.display_name if hasattr(store, 'display_name') else 'N/A'}")
+                print(
+                    f"Display Name: {store.display_name if hasattr(store, 'display_name') else 'N/A'}")
                 # Additional file listing would depend on API capabilities
                 return []
             return []

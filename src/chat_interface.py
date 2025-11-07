@@ -124,7 +124,8 @@ class ChatInterface:
             return
 
         if not self.current_store:
-            print("\nWarning: No file search store selected. Using chat without file search.")
+            print(
+                "\nWarning: No file search store selected. Using chat without file search.")
             print("Use '/select <store-name>' to enable file search.")
 
         # Send message and display response
@@ -152,7 +153,8 @@ class ChatInterface:
         print("\nGeneral:")
         print("  /help                    - Show this help message")
         print("  /quit or /exit           - Exit the application")
-        print("\nNote: Commands support both short (/create) and long (/create-store) forms.")
+        print(
+            "\nNote: Commands support both short (/create) and long (/create-store) forms.")
         print("      To chat, simply type your message without a command prefix.")
         print("="*70)
 
@@ -172,7 +174,8 @@ class ChatInterface:
             print(f"Store Name: {store.name}")
 
             # Ask if user wants to select this store
-            choice = input("\nSelect this store for chat? (y/n): ").strip().lower()
+            choice = input(
+                "\nSelect this store for chat? (y/n): ").strip().lower()
             if choice == 'y':
                 self.current_store = store
                 self.gemini_client.set_file_search_stores([store.name])
@@ -268,7 +271,8 @@ class ChatInterface:
         """Start a new chat session."""
         if self.gemini_client.chat:
             print("\nA chat session is already active.")
-            choice = input("Reset and start new session? (y/n): ").strip().lower()
+            choice = input(
+                "Reset and start new session? (y/n): ").strip().lower()
             if choice != 'y':
                 return
 
@@ -276,7 +280,8 @@ class ChatInterface:
             if self.current_store:
                 print(f"Using file search store: {self.current_store.name}")
             else:
-                print("No file search store selected. Chat will work without file search.")
+                print(
+                    "No file search store selected. Chat will work without file search.")
                 print("Use '/select <store-name>' to enable file search.")
 
     def cmd_reset_chat(self):
@@ -339,11 +344,13 @@ class ChatInterface:
             with open(filepath, 'w', encoding='utf-8') as f:
                 # Write header
                 f.write("# Gemini Chat Conversation Export\n\n")
-                f.write(f"**Exported:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+                f.write(
+                    f"**Exported:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
                 f.write(f"**Model:** {Config.MODEL_NAME}\n\n")
 
                 if self.current_store:
-                    f.write(f"**File Search Store:** {self.current_store.name}\n\n")
+                    f.write(
+                        f"**File Search Store:** {self.current_store.name}\n\n")
 
                 f.write("---\n\n")
 
@@ -364,7 +371,8 @@ class ChatInterface:
                                 if role == 'MODEL' and hasattr(message, 'candidates'):
                                     for candidate in message.candidates:
                                         if hasattr(candidate, 'grounding_metadata') and candidate.grounding_metadata:
-                                            f.write(self._format_citations_markdown(candidate.grounding_metadata))
+                                            f.write(self._format_citations_markdown(
+                                                candidate.grounding_metadata))
 
                                 f.write("---\n\n")
 
@@ -398,7 +406,8 @@ class ChatInterface:
 
                 # Try to extract relevant information from the chunk
                 if hasattr(chunk, 'web') and chunk.web:
-                    title = chunk.web.title if hasattr(chunk.web, 'title') else 'N/A'
+                    title = chunk.web.title if hasattr(
+                        chunk.web, 'title') else 'N/A'
                     markdown += f"**Web:** {title}\n"
                     if hasattr(chunk.web, 'uri'):
                         markdown += f"   - URI: {chunk.web.uri}\n"

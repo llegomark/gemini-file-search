@@ -95,7 +95,8 @@ class GeminiChatClient:
                 ]
 
             # Create config object if we have any parameters
-            config = types.GenerateContentConfig(**config_params) if config_params else None
+            config = types.GenerateContentConfig(
+                **config_params) if config_params else None
 
             # Send message
             if config:
@@ -157,7 +158,8 @@ class GeminiChatClient:
         if hasattr(grounding_metadata, 'search_entry_point') and grounding_metadata.search_entry_point:
             print("\nSearch queries used:")
             if hasattr(grounding_metadata.search_entry_point, 'rendered_content'):
-                print(f"  {grounding_metadata.search_entry_point.rendered_content}")
+                print(
+                    f"  {grounding_metadata.search_entry_point.rendered_content}")
 
         # Display grounding chunks (sources)
         if hasattr(grounding_metadata, 'grounding_chunks') and grounding_metadata.grounding_chunks:
@@ -168,7 +170,8 @@ class GeminiChatClient:
 
                 # Try to extract relevant information from the chunk
                 if hasattr(chunk, 'web') and chunk.web:
-                    print(f"Web: {chunk.web.title if hasattr(chunk.web, 'title') else 'N/A'}")
+                    print(
+                        f"Web: {chunk.web.title if hasattr(chunk.web, 'title') else 'N/A'}")
                     if hasattr(chunk.web, 'uri'):
                         print(f"   URI: {chunk.web.uri}")
                 elif hasattr(chunk, 'retrieved_context') and chunk.retrieved_context:
@@ -183,7 +186,8 @@ class GeminiChatClient:
 
         # Display grounding supports (which parts of the answer are grounded)
         if hasattr(grounding_metadata, 'grounding_supports') and grounding_metadata.grounding_supports:
-            print(f"\nGrounding supports: {len(grounding_metadata.grounding_supports)} segment(s) grounded")
+            print(
+                f"\nGrounding supports: {len(grounding_metadata.grounding_supports)} segment(s) grounded")
 
         print("="*70)
 
