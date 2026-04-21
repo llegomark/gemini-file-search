@@ -1,5 +1,5 @@
 google-genai==1.49.0
-python-dotenv==1.2.1
+python-dotenv==1.2.2
 
 # Testing dependencies
 pytest==8.4.2
